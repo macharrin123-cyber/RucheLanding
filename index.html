@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruche – Coming Soon</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/BEE.png" type="image/png">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <img src="assets/BEE.png" alt="Ruche Logo" class="logo">
+
+        <h1 class="title">RUCHE</h1>
+        <p class="subtitle">Your on-demand helper hub for Geneva.</p>
+
+        <div class="coming-soon">Coming Soon on iOS</div>
+
+        <form class="notify-box">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Notify Me</button>
+        </form>
+
+    </div>
+
+    <footer>
+        © 2025 Ruche — A HSV Capital Company.
+    </footer>
+
+    <script>
+      // Simple placeholder behaviour for now
+      document.querySelector('.notify-box').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert("Thanks! You'll be notified when Ruche launches.");
+      });
+    </script>
+</body>
+</html>

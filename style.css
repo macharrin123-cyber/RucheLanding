@@ -1,0 +1,92 @@
+/* Global luxury aesthetic */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container {
+    margin: auto;
+    text-align: center;
+    padding: 40px;
+}
+
+/* Golden bee logo */
+.logo {
+    width: 160px;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+/* RUche Title */
+.title {
+    font-size: 48px;
+    letter-spacing: 4px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #555;
+}
+
+/* Coming Soon Tag */
+.coming-soon {
+    margin-top: 30px;
+    display: inline-block;
+    padding: 10px 22px;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    border-radius: 30px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* Email notify box */
+.notify-box {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.notify-box input {
+    padding: 12px 16px;
+    min-width: 240px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+}
+
+.notify-box button {
+    padding: 12px 20px;
+    background: #d4af37;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.notify-box button:hover {
+    background: #b9932c;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    color: #999;
+}
