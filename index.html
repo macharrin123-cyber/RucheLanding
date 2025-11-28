@@ -6,38 +6,194 @@
     <title>Ruche – Coming Soon</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/BEE.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
+
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-button" id="currentLang">
+            <span class="flag">🇬🇧</span>
+            <span class="lang-code">EN</span>
+            <span class="arrow">▼</span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown">
+            <div class="lang-option" data-lang="en" data-flag="🇬🇧">EN</div>
+            <div class="lang-option" data-lang="fr" data-flag="🇫🇷">FR</div>
+            <div class="lang-option" data-lang="de" data-flag="🇩🇪">DE</div>
+            <div class="lang-option" data-lang="it" data-flag="🇮🇹">IT</div>
+        </div>
+    </div>
 
     <div class="container">
 
         <img src="assets/BEE.png" alt="Ruche Logo" class="logo">
 
         <h1 class="title">RUCHE</h1>
-        <p class="subtitle">Your on-demand helper hub for Geneva.</p>
+        <p class="subtitle" data-i18n="subtitle">Your on-demand helper hub for Geneva.</p>
 
-        <div class="coming-soon">Coming Soon on iOS</div>
+        <div class="coming-soon" data-i18n="comingSoon">Coming Soon on iOS</div>
 
         <form class="notify-box">
-            <input type="email" placeholder="Enter your email" required>
-            <button type="submit">Notify Me</button>
+            <input type="email" data-i18n-placeholder="emailPlaceholder" placeholder="Enter your email" required>
+            <button type="submit" data-i18n="notifyButton">Notify Me</button>
         </form>
 
     </div>
 
     <footer>
-        © 2025 Ruche — A HSV Capital Company.
+        <span data-i18n="footer">© 2025 Ruche — A HSV Capital Company.</span>
     </footer>
 
     <script>
-      // Simple placeholder behaviour for now
-      document.querySelector('.notify-box').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert("Thanks! You'll be notified when Ruche launches.");
+      // Initialize Supabase
+      const SUPABASE_URL = 'https://koeywdvnbdbaoxruoaqn.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtvZXl3ZHZuYmRiYW94cnVvYXFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAzMTYyMDcsImV4cCI6MjA2NTg5MjIwN30.y2ahvCyWJbkLUS9aBVhi_cW6Ohbz4Pwp9OcxsCJ6pck';
+      const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      // Translations
+      const translations = {
+        en: {
+          subtitle: "Your on-demand helper hub for Geneva.",
+          comingSoon: "Coming Soon on iOS",
+          emailPlaceholder: "Enter your email",
+          notifyButton: "Notify Me",
+          footer: "© 2025 Ruche — A HSV Capital Company.",
+          alertMessage: "Thanks! You'll be notified when Ruche launches.",
+          submitting: "Submitting...",
+          alreadyRegistered: "This email is already registered!",
+          errorMessage: "An error occurred. Please try again."
+        },
+        fr: {
+          subtitle: "Votre hub d'aide à la demande pour Genève.",
+          comingSoon: "Bientôt disponible sur iOS",
+          emailPlaceholder: "Entrez votre email",
+          notifyButton: "Me Notifier",
+          footer: "© 2025 Ruche — Une Société HSV Capital.",
+          alertMessage: "Merci ! Vous serez notifié lors du lancement de Ruche.",
+          submitting: "Envoi en cours...",
+          alreadyRegistered: "Cet email est déjà enregistré!",
+          errorMessage: "Une erreur s'est produite. Veuillez réessayer."
+        },
+        de: {
+          subtitle: "Ihr On-Demand-Hilfezentrum für Genf.",
+          comingSoon: "Bald auf iOS verfügbar",
+          emailPlaceholder: "E-Mail eingeben",
+          notifyButton: "Benachrichtigen",
+          footer: "© 2025 Ruche — Ein HSV Capital Unternehmen.",
+          alertMessage: "Danke! Sie werden benachrichtigt, wenn Ruche startet.",
+          submitting: "Wird gesendet...",
+          alreadyRegistered: "Diese E-Mail ist bereits registriert!",
+          errorMessage: "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+        },
+        it: {
+          subtitle: "Il tuo hub di assistenza su richiesta per Ginevra.",
+          comingSoon: "Prossimamente su iOS",
+          emailPlaceholder: "Inserisci la tua email",
+          notifyButton: "Avvisami",
+          footer: "© 2025 Ruche — Una Società HSV Capital.",
+          alertMessage: "Grazie! Sarai avvisato al lancio di Ruche.",
+          submitting: "Invio in corso...",
+          alreadyRegistered: "Questa email è già registrata!",
+          errorMessage: "Si è verificato un errore. Riprova."
+        }
+      };
+
+      let currentLanguage = 'en';
+
+      // Function to update page language
+      function updateLanguage(lang) {
+        currentLanguage = lang;
+        
+        // Update text content
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+          const key = element.getAttribute('data-i18n');
+          element.textContent = translations[lang][key];
+        });
+
+        // Update placeholders
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+          const key = element.getAttribute('data-i18n-placeholder');
+          element.placeholder = translations[lang][key];
+        });
+
+        // Update current language button
+        const flags = { en: '🇬🇧', fr: '🇫🇷', de: '🇩🇪', it: '🇮🇹' };
+        const langCodes = { en: 'EN', fr: 'FR', de: 'DE', it: 'IT' };
+        document.querySelector('.flag').textContent = flags[lang];
+        document.querySelector('.lang-code').textContent = langCodes[lang];
+      }
+
+      // Language selector functionality
+      const langButton = document.getElementById('currentLang');
+      const langDropdown = document.getElementById('langDropdown');
+
+      langButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        langDropdown.classList.toggle('show');
       });
 
-      // Toggle between light and dark mode every 10 seconds
+      document.querySelectorAll('.lang-option').forEach(option => {
+        option.addEventListener('click', function() {
+          const lang = this.getAttribute('data-lang');
+          updateLanguage(lang);
+          langDropdown.classList.remove('show');
+        });
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function() {
+        langDropdown.classList.remove('show');
+      });
+
+      // Form submission
+      document.querySelector('.notify-box').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const emailInput = this.querySelector('input[type="email"]');
+        const email = emailInput.value.trim();
+        const submitButton = this.querySelector('button[type="submit"]');
+        
+        // Disable button to prevent double submission
+        submitButton.disabled = true;
+        submitButton.textContent = translations[currentLanguage].submitting || 'Submitting...';
+        
+        try {
+          // Insert email into Supabase
+          const { data, error } = await supabase
+            .from('email_waitlist')
+            .insert([
+              { 
+                email: email,
+                language: currentLanguage 
+              }
+            ])
+            .select();
+          
+          if (error) {
+            // Check if it's a duplicate email error
+            if (error.code === '23505') {
+              alert(translations[currentLanguage].alreadyRegistered || 'This email is already registered!');
+            } else {
+              throw error;
+            }
+          } else {
+            // Success
+            alert(translations[currentLanguage].alertMessage);
+            emailInput.value = ''; // Clear the input
+          }
+        } catch (error) {
+          console.error('Error saving email:', error);
+          alert(translations[currentLanguage].errorMessage || 'An error occurred. Please try again.');
+        } finally {
+          // Re-enable button
+          submitButton.disabled = false;
+          submitButton.textContent = translations[currentLanguage].notifyButton;
+        }
+      });
+
+      // Toggle between light and dark mode every 7 seconds
       setInterval(function() {
         document.body.classList.toggle('dark-mode');
       }, 7000);

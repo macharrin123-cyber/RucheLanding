@@ -16,6 +16,119 @@ body.dark-mode {
     color: #ffffff;
 }
 
+/* Language Selector */
+.language-selector {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.lang-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #ffffff;
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1a1a1a;
+    transition: all 0.3s ease, background 1.5s ease, color 1.5s ease, border-color 1.5s ease;
+}
+
+.lang-button:hover {
+    background: #f9f9f9;
+}
+
+body.dark-mode .lang-button {
+    background: #1a1a1a;
+    color: #ffffff;
+    border-color: #d4af37;
+}
+
+body.dark-mode .lang-button:hover {
+    background: #2a2a2a;
+}
+
+.flag {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.lang-code {
+    font-weight: 600;
+}
+
+.arrow {
+    font-size: 10px;
+    transition: transform 0.3s ease;
+}
+
+.lang-button:hover .arrow {
+    transform: translateY(2px);
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+    min-width: 80px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease, background 1.5s ease, border-color 1.5s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.lang-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+body.dark-mode .lang-dropdown {
+    background: #1a1a1a;
+    border-color: #d4af37;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.lang-option {
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+    color: #1a1a1a;
+    transition: all 0.2s ease, background 0.2s ease, color 1.5s ease;
+}
+
+.lang-option:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.lang-option:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+.lang-option:hover {
+    background: #f9f9f9;
+    color: #d4af37;
+}
+
+body.dark-mode .lang-option {
+    color: #ffffff;
+}
+
+body.dark-mode .lang-option:hover {
+    background: #2a2a2a;
+    color: #d4af37;
+}
+
 .container {
     margin: auto;
     text-align: center;
